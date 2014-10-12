@@ -1,0 +1,198 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="google" content="notranslate" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="css/score.css" />
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<title>Tarot Scoring</title>
+</head>
+<body>
+<form>
+<h3>Bidding</h3>
+  <p>Bid:
+<select id="bid">
+<option selected="selected" value="1">Petite</option>
+<option value="2">Garde</option>
+<option value="4">Garde sans le chein</option>
+<option value="6">Garde contra le chien</option>
+</select>
+  </p>
+  <p>Poignée:
+<select id="poignee">
+<option selected="selected" value="0">non</option>
+<option value="20">10 trumps</option>
+<option value="30">13 trumps</option>
+<option value="40">15 trumps</option>
+</select>
+  </p>
+<h3>Tricks</h3>
+<table>
+<tr>
+<td>Bouts:</td>
+<td>
+<select id="bouts">
+<option selected="selected" value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>Roi:</td>
+<td>
+<select id="roi">
+<option selected="selected" value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>Dame:</td>
+<td>
+<select id="dame">
+<option selected="selected" value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>Cavalier:</td>
+<td>
+<select id="cavalier">
+<option selected="selected" value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>Valet:</td>
+<td>
+<select id="valet">
+<option selected="selected" value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>Remaining cards:</td>
+<td>
+<input id="cards" type="number" min="0" max="58" value="0"/>
+</td>
+</tr>
+</table>
+
+<h3>Bonuses</h3>
+
+  <p>Petit au bout:
+<select id="petitaubout">
+<option selected="selected" value="0">non</option>
+<option value="10">pris</option>
+<option value="-10">perdu</option>
+</select>
+  </p>
+
+  <p>Chelem:
+<select id="chelem">
+<option selected="selected" value="nonannonce">non annoncé</option>
+<option value="annonce">annoncé</option>
+</select>
+  </p>
+
+<p id="score"></p>
+<p id="message"></p>
+
+<div>
+  <hr />
+  <p>The score is calculated as follows:</p>
+
+  <p>With <span id="ex-bouts"></span> bouts, you need
+  <span id="ex-pointsneeded"></span> card points to win.
+  </p>
+
+  <table id="excp">
+    <tr>
+      <td class="left"><span id="ex-bouts2"></span> bouts</td>
+      <td>at 4.5 points each =</td>
+      <td><span id="ex-bouts-score"></span></td>
+    </tr>
+    <tr>
+      <td class="left"><span id="ex-roi"></span> roi</td>
+      <td>at 4.5 points each =</td>
+      <td><span id="ex-roi-score"></span></td>
+    </tr>
+    <tr>
+      <td class="left"><span id="ex-dame"></span> dame</td>
+      <td>at 3.5 points each =</td>
+      <td><span id="ex-dame-score"></span></td>
+    </tr>
+    <tr>
+      <td class="left"><span id="ex-cavalier"></span> cavalier</td>
+      <td>at 2.5 points each =</td>
+      <td><span id="ex-cavalier-score"></span></td>
+    </tr>
+    <tr>
+      <td class="left"><span id="ex-valet"></span> valet</td>
+      <td>at 1.5 points each =</td>
+      <td><span id="ex-valet-score"></span></td>
+    </tr>
+    <tr>
+      <td class="left"><span id="ex-cards"></span> cards</td>
+      <td>at 0.5 points each =</td>
+      <td><span id="ex-cards-score"></span></td>
+    </tr>
+    <tr>
+      <td>&#160;</td>
+      <td>Card points =</td>
+      <td><span id="ex-cardpoints"></span></td>
+    </tr>
+  </table>
+
+  <p id="ex-bid-p">You bid
+  <span id="ex-bid"></span> which multiplies your score
+  by <span id="ex-bid-mult"></span>.
+  </p>
+
+  <p id="ex-poignee-p">You declared
+  <span id="ex-poignee-trumps"></span> for a
+  <span id="ex-poignee"></span> point poignée bonus.</p>
+
+  <p id="ex-chelem-p">You
+  <span id="ex-chelem-decl"></span> your intent to take all
+  the tricks and you <span id="ex-chelem-succ"></span>.
+  You get a <span id="ex-chelem"></span> point
+  <span id="ex-chelem-bonus"></span>.</p>
+
+  <p>So, you get:</p>
+
+  <ul>
+  <li>25 points for the game</li>
+  <li>pt = <span id="ex-pt"></span> (card points - points needed)</li>
+  <li>pb = <span id="ex-pb"></span> (petit au bout bonus)</li>
+  <li>mu = <span id="ex-mu"></span> (bid multiplier)</li>
+  <li>pg = <span id="ex-pg"></span> (poignée bonus)</li>
+  <li>ch = <span id="ex-ch"></span> (chelem bonus)</li>
+  </ul>
+
+  <p><span>((25 + pt + pb) * mu) + pg + ch</span> =
+  <span id="explain"></span>
+  = <span id="ex-score"></span>.</p>
+</div>
+
+</form>
+<script src="js/score.js"></script>
+</body>
+</html>
