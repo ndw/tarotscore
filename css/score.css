@@ -1,7 +1,27 @@
+td, th {
+   text-align: left;
+}
+
 #excp td {
    text-align: right;
 }
 
 #excp td.left {
    text-align: left;
+}
+
+.scorecol {
+   text-align: right;
+}
+
+#bidding-div {
+   display: none;
+}
+
+#explain-div {
+   display: none;
+}
+
+#chelem-p {
+   display: none;
 }
