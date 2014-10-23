@@ -25,3 +25,11 @@ td, th {
 #chelem-p {
    display: none;
 }
+
+#version {
+   color: #aaaaaa;
+   position: absolute;
+   font-size: 8pt;
+   bottom: 5;
+   right: 5;
+}
