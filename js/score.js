@@ -79,6 +79,7 @@ function scoreTarot() {
     if (pt >= 0) {
         scoreMsg = player + " wins " + score + " points from <em>each</em> player"
     } else {
+        score = -score
         scoreMsg = player + " <em>loses</em> " + Math.abs(score)
                    + " points to <em>each</em> player"
     }
